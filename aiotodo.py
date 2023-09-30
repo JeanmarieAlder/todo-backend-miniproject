@@ -1,7 +1,8 @@
 import logging
-from aiohttp import web
+
 import aiohttp_cors
-import time
+import aiosqlite
+from aiohttp import web
 
 TODOS = {
     0: {'title': 'build an API', 'order': 1, 'completed': False},
@@ -22,10 +23,23 @@ TODOS_TAGS = {
     3: {'todo': 1, 'tag': 2}
 }
 
-def get_all_todos(request):
-    return web.json_response([
-        {'id': key, **todo} for key, todo in TODOS.items()
-    ])
+async def get_all_todos(request):
+
+    db = await aiosqlite.connect('todo.db')
+    cursor = await db.execute('SELECT * FROM Todo')
+    rows = await cursor.fetchall()
+    col_names = [description[0] for description in cursor.description]  # Get column names
+    await cursor.close()
+    await db.close()
+
+    result = []
+    for row in rows:
+        row_dict = {}
+        for i, col_name in enumerate(col_names):
+            row_dict[col_name] = row[i]
+        result.append(row_dict)
+
+    return web.json_response(result)
 
 def remove_all_todos(request):
     TODOS.clear()
