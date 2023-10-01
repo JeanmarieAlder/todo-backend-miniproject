@@ -4,6 +4,10 @@ Yet another [todo backend](http://todobackend.com) written in Python 3.5 with ai
 
 ## Usage
 
+- Copy "example.env" to ".env" at the root of the project and adapt if needed. Default values will do for a local environment (localhost:8080).
+- Create a virtual environment if needed: ```python -m venv venv``` (or similar). Inside virtual environment, install all dependencies: ```pip install -r requirements.txt```.
+- 
+
 ```
 python3 aiotodo.py
 ```
