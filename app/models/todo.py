@@ -45,11 +45,10 @@ class Todo:
             # Get tags of todos
             row_dict['tags'] = await cls.get_tags_of_todo(id)
             row_dict['completed'] = bool(row_dict['completed'])
-            print(row_dict)
 
             return row_dict
         except Exception as e:
-            print(e.with_traceback())
+            # print(e.with_traceback())
             return {}
     
 
@@ -98,8 +97,6 @@ class Todo:
         # Check if the specified todo exists in the database
         cursor = await db.execute(f'SELECT * FROM Todo WHERE id = "{id}"')
         existing_todo = await cursor.fetchone()
-        print(existing_todo)
-        print(data)
 
         if not existing_todo:
             await db.close()
@@ -151,7 +148,7 @@ class Todo:
             await db.close()
             return await cls.get_one(id_todo)
         except Exception as e:
-            print(e.with_traceback())
+            # print(e.with_traceback())
             await db.colose
             return {'error': 'Todo or Tag missing.'}
         
@@ -167,7 +164,7 @@ class Todo:
         try:
             return await cls.get_one(id_todo)
         except Exception as e:
-            print(e.with_traceback())
+            # print(e.with_traceback())
             return {'error': 'Todo not found.'}
         
 
@@ -183,6 +180,6 @@ class Todo:
         
             return await cls.get_one(id_todo)
         except Exception as e:
-            print(e.with_traceback())
+            # print(e.with_traceback())
             return {'error': 'Todo or Tag not found.'}
     

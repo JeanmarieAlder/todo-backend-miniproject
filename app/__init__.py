@@ -53,8 +53,6 @@ async def init_app(loop):
     srv = await loop.create_server(app.make_handler(), IP, PORT)
     return srv
 
-
-
 ##################
 # Todo part
 

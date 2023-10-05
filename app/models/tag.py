@@ -45,7 +45,7 @@ class Tag:
             row_dict['todos'] = await cls.get_todos(id)
             return row_dict
         except Exception as e:
-            print(e.with_traceback())
+            # print(e.with_traceback())
             return {}
     
 
@@ -69,8 +69,6 @@ class Tag:
         # Check if the specified tag exists in the database
         cursor = await db.execute(f'SELECT * FROM Tag WHERE id = "{id}"')
         existing_tag = await cursor.fetchone()
-        print(existing_tag)
-        print(data)
 
         if not existing_tag:
             await db.close()
@@ -118,7 +116,6 @@ class Tag:
                                     INNER JOIN Todo AS t ON tt.todo_id = t.id
                                     WHERE tt.tag_id = '{tag_id}'""")
         rows = await cursor.fetchall()
-        print(rows)
         col_names = [description[0] for description in cursor.description]  # Get column names
         await cursor.close()
         await db.close()
