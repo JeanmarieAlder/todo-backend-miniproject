@@ -5,6 +5,7 @@ Yet another [todo backend](http://todobackend.com) written in Python 3.5 with ai
 Modified by Jean-Marie Alder for the todo-tag backend miniproject.
 
 ## Usage
+- Please note that if "python" is not recognized by your machine, try other aliases, like py, python3. Make sure that Python is installed on your system.
 
 - Copy "example.env" to ".env" at the root of the project and adapt if needed. Default values will do for a local environment (localhost:8080).
 - Create a virtual environment: ```python -m venv venv``` (or similar, e.g., ```python3 -m venv venv```). 
